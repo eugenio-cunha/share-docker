@@ -1,0 +1,30 @@
+\documentclass[10pt]{beamer}
+\usetheme[]{Feather}
+
+\include{packages}
+\include{commands}
+
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+
+\include{title}
+
+\begin{document}
+
+{\1
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}}
+
+\input{frames/content}
+\input{frames/containers}
+\input{frames/docker}
+\input{frames/ecosystem}
+
+{\1
+\begin{frame}[plain,noframenumbering]
+  \finalpage{Obrigado e use Docker ;)}
+\end{frame}}
+
+\end{document}

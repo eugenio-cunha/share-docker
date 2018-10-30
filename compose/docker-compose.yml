@@ -1,0 +1,19 @@
+version: '3'
+
+# Declaro os serviços WEB e REDIS
+services:
+
+  # Aplicação python
+  web:
+    # Buid da imagem
+    build: .
+    # Ligo a porta 9090 do host a porta 5000 do container
+    ports:
+      - 9090:5000
+    # Defino o Redis como dependência da aplicação
+    depends_on:
+      - redis
+
+  # Banco de dados Redis
+  redis:
+    image: "redis:alpine"
