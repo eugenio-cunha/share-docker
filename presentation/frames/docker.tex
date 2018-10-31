@@ -18,6 +18,15 @@
   \end{figure}
 \end{frame}
 
+\subsection{Docker Image}
+\begin{frame}{Docker}{Docker Image}
+  \begin{figure}[ht!]
+    \centering
+    \includegraphics[width=80mm]{images/image_layers.png}
+  \end{figure}
+  A imagem Docker é um modelo somente leitura a partir do qual os contêineres são instanciados. Cada imagem consiste em uma série de camadas (layers).
+\end{frame}
+
 \begin{frame}[fragile]{Docker}{Dockerfile}
   \begin{itemize}
     \item<1-> Dockerfile Correto
@@ -31,21 +40,21 @@
 
   RUN npm set progress=false && npm install && npm cache clean --force
 
-  EXPOSE 3000
-
   ENV HTTP_PORT=9090
+
+  EXPOSE $HTTP_PORT
 
   CMD ["npm", "start"]
   \end{lstlisting}
   \begin{lstlisting}[language=bash]
   # bash console
-  docker image build -t minha_primeira_imagem:share .
+  docker image build -t imagem_correta:share .
   \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Docker}{Dockerfile}
   \begin{itemize}
-    \item<1-> Dockerfile Incorreto
+    \item<1-> Dockerfile Errado
   \end{itemize}
   \begin{lstlisting}[language=docker]
   FROM node:10.12.0-alpine
@@ -62,25 +71,27 @@
 
   RUN npm cache clean --force
 
-  EXPOSE 3000
-
   ENV HTTP_PORT=9090
+
+  EXPOSE $HTTP_PORT
 
   CMD ["npm", "start"]
   \end{lstlisting}
   \begin{lstlisting}[language=bash]
   # bash console
-  docker image build -t minha_primeira_imagem:share .
+  docker image build -t imagem_errada:share .
   \end{lstlisting}
 \end{frame}
 
-
-
-\subsection{Docker Image}
-\begin{frame}{Docker}{Docker Image}
+\begin{frame}[fragile]{Docker}{Containers são efêmeros!}
+  Containers são efêmeros, nascem e morrem com a sua aplicação.
   \begin{figure}[ht!]
     \centering
-    \includegraphics[width=80mm]{images/image.png}
+    \includegraphics[width=80mm]{images/efemeros.jpg}
   \end{figure}
-  A imagem Docker é um modelo somente leitura a partir do qual os contêineres são instanciados. Cada imagem consiste em uma série de camadas (layers).
+  \begin{lstlisting}[language=bash]
+  # bash console
+  docker container run -d -p 8001:9090 -e HTTP_PORT=9090 --name efemero efemero:share
+  docker container run -d -p 8002:9090 -dit --restart=always -e HTTP_PORT=9090 --name zumbi zumbi:share
+  \end{lstlisting}
 \end{frame}

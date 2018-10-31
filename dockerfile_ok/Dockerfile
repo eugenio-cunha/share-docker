@@ -11,11 +11,11 @@ RUN npm set progress=false && \
 npm install && \
 npm cache clean --force
 
-# Expõe a porta da aplicação
-EXPOSE 3000
-
 # Configura a porta HTTP como uma variável de ambiente
 ENV HTTP_PORT=9090
+
+# Expõe a porta da aplicação
+EXPOSE $HTTP_PORT
 
 # Inicia a aplicação
 CMD ["npm", "start"]

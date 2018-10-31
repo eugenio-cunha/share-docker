@@ -2,9 +2,9 @@
 
 * Dockerfile
     * Correto
-        * `docker image build -t correto:share .`
+        * `docker image build -t imagem_correta:share .`
     * Errado
-        * `docker image build -t errado:share .`
+        * `docker image build -t imagem_errada:share .`
 
 * Containers
     * Efêmero
@@ -33,3 +33,5 @@
             -e GID=$(id -g) \
             -e USERNAME=$(id -un) \
             tegieng7/vscode-python`
+* Version DIST
+    * `cat /etc/*-release`
